@@ -3,17 +3,23 @@ from models import Links
 from flask import request, render_template, redirect
 import base62
 
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         url = request.form.get('original_url')
+        query = Links.query.filter_by(original_url=url).first()
+        if query != None:
+            short_url = f'http://{app.config["DOMAINS"][-1]}/{base62.encode(query.id)}'
+            return f'<h1>{short_url}</h1>'
+
         link = Links(original_url=url)
         db.session.add(link)
         db.session.commit()
         db.session.refresh(link)
-        short_url = f'http://192.168.0.14/{base62.encode(link.id)}'
+        short_url = f'http://{app.config["DOMAINS"][-1]}/{base62.encode(link.id)}'
         return f'<h1>{short_url}</h1>'
-
 
     return '''
     <form action="/" method="POST">
@@ -21,7 +27,6 @@ def index():
         <button type="submit">allah</button>
     </form>
     '''
-    
 
 
 @app.route('/top', methods=['GET'])
@@ -42,12 +47,14 @@ def about_page():
 @app.route('/<magical_url>')
 def magic(magical_url):
    link = Links.query.filter_by(id=base62.decode(magical_url)).first_or_404()
-   print(link)
+   link.visits += 1
+   db.session.commit()
+   print(link.visits)
    return redirect(link.original_url)
 
 
 @app.errorhandler(404)
 def not_found_page(e):
-    return '4040404040', 404
+    return '<h1>Not Found</h1>', 404
 
 

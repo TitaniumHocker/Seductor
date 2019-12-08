@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class Links(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
     original_url = db.Column(db.String(2048), unique=True, nullable=False)
     created = db.Column(db.DateTime, default=datetime.now(), nullable=False)
     visits = db.Column(db.Integer, default=0, nullable=False)

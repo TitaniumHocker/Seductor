@@ -11,5 +11,5 @@ SECRET_KEY = 'd05661c81df53f54e9973d8ccdbb0666cd91925d89b24abfad58a1073d3f0a2e'
 # Devepopment config
 SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
 DEBUG = True
-DOMAINS = ['192.168.0.14']
+DOMAINS = ['10.15.3.198']
 

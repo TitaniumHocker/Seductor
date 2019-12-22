@@ -1,8 +1,9 @@
-from app import *
-from models import Links
-from flask import request, render_template, redirect
+# -*- coding: utf-8 -*-
+from flask import request, render_template, redirect, abort
+from .app import app
+from .extensions import db
+from .models import Links
 import base62
-
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -49,7 +50,6 @@ def magic(magical_url):
    link = Links.query.filter_by(id=base62.decode(magical_url)).first_or_404()
    link.visits += 1
    db.session.commit()
-   print(link.visits)
    return redirect(link.original_url)
 
 

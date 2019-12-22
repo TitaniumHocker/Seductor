@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*-
+from os import environ
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-SECRET_KEY = 'd05661c81df53f54e9973d8ccdbb0666cd91925d89b24abfad58a1073d3f0a2e' 
+
+SECRET_KEY = environ.get('SECRET_KEY')
+API_KEY = environ.get('API_KEY')
 
 # Domains
 # DOMAINS = ['sdct.ru']
@@ -10,6 +14,5 @@ SECRET_KEY = 'd05661c81df53f54e9973d8ccdbb0666cd91925d89b24abfad58a1073d3f0a2e'
 
 # Devepopment config
 SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
-DEBUG = True
-DOMAINS = ['10.15.3.198']
+DOMAINS = ['localhost']
 

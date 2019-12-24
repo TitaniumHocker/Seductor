@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block navlinks %}
+  <a class="nav-link active" href="/">Home</a>
+  <a class="nav-link" href="/about">About</a>
+  <a class="nav-link" href="/top">Top</a>
+{% endblock %}
+
+{% block content %}
+  <div class="vertical-center">
+    <div class="container">
+      <div class="row mx-auto text-center mb-5 pb-5">
+        <div class="col-12">
+          <h1 class="urobilin main-label">Seductor</h1>
+        </div>
+        <div class="col-12 mx-auto text-center">
+          <form class="form-inline">
+            <div class="input-group col-6 mx-auto">
+              <input type="url" class="form-control form-control-lg bg-rich-black urobilin cornered only-bottom-border" placeholder="Type your URL here" name="url">
+              <button class="btn bg-urobilin pure-white cornered px-3" type="submit" style="font-size:18px;">Magic</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

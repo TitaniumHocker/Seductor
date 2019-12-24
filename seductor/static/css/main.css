@@ -1,0 +1,107 @@
+body {
+    font-family: Roboto;
+    font-weight: 700;
+    height:100%;
+}
+
+.cardinal {
+    color: #960200 !important;
+}
+
+.bg-cardinal {
+    background-color: #960200 !important;
+}
+
+.urobilin {
+    color: #e6af2e !important;
+}
+
+.bg-urobilin {
+    background-color: #e6af2e !important;
+}
+
+.viridian {
+    color: #3f826d !important;
+}
+
+.bg-viridian {
+    background-color: #3f826d !important;
+}
+
+.rich-black {
+    color: #0f0f0f !important;
+}
+
+.bg-rich-black {
+    background-color: #0f0f0f !important;
+}
+
+.pure-white {
+    color: #fbfffe !important;
+}
+
+.bg-pure-white {
+    background-color: #fbfffe !important;
+}
+
+.platinum {
+    color: #e6ebe0 !important;
+}
+
+.bg-platinum {
+    background-color: #e6ebe0 !important;
+}
+
+.nav-master .nav-link {
+    margin-left: 1rem;
+    padding: 0.25rem 0;
+    border-bottom: .25rem solid;
+    border-bottom-color: #0f0f0f;
+    color: #e6af2e !important;
+    outline: none;
+}
+
+.nav-link:hover {
+    border-bottom-color: #e6af2e;
+}
+
+.active {
+    border-bottom-color: #e6af2e !important;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.main-label {
+    letter-spacing: 1rem;
+    font-size: 3.5rem;
+    font-weight:700;
+}
+
+.cornered {
+    border-radius: 0px !important;
+}
+
+.only-bottom-border {
+    border-top-width: 0px !important;
+    border-left-width: 0px !important;
+    border-right-width: 0px !important;
+    border-bottom-width: 1px !important;
+    border-color: #0f0f0f;
+}
+
+.only-bottom-border:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: #e6af2e;
+}
+
+::-webkit-input-placeholder {color:#e6af2e !important;}
+::-moz-placeholder          {color:#e6af2e !important;}/* Firefox 19+ */
+:-moz-placeholder           {color:#e6af2e !important;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#e6af2e !important;}

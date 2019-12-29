@@ -44,6 +44,14 @@ body {
     background-color: #fbfffe !important;
 }
 
+.smooth-white {
+    color: #fbfbfb !important;
+}
+
+.bg-smooth-white {
+    background-color: #fbfbfb !important;
+}
+
 .platinum {
     color: #e6ebe0 !important;
 }
@@ -56,7 +64,7 @@ body {
     margin-left: 1rem;
     padding: 0.25rem 0;
     border-bottom: .25rem solid;
-    border-bottom-color: #0f0f0f;
+    border-bottom-color: #fbfbfb;
     color: #e6af2e !important;
     outline: none;
 }

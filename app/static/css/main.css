@@ -73,6 +73,13 @@ body {
     border-bottom-color: #e6af2e;
 }
 
+.magic-link:hover {
+    border-bottom-color: none;
+    color: #e6af2e !important;
+    outline: none;
+    border-bottom: none;
+}
+
 .active {
     border-bottom-color: #e6af2e !important;
 }
@@ -100,16 +107,18 @@ body {
     border-left-width: 0px !important;
     border-right-width: 0px !important;
     border-bottom-width: 1px !important;
-    border-color: #0f0f0f;
+    border-color: #fbfbfb;
 }
 
 .only-bottom-border:focus {
     box-shadow: none;
     outline: none;
     border-color: #e6af2e;
+    text-shadow: none;
 }
 
-::-webkit-input-placeholder {color:#e6af2e !important;}
-::-moz-placeholder          {color:#e6af2e !important;}/* Firefox 19+ */
-:-moz-placeholder           {color:#e6af2e !important;}/* Firefox 18- */
-:-ms-input-placeholder      {color:#e6af2e !important;}
+
+::-webkit-input-placeholder {color:#e6af2e !important; text-shadow: none;}
+::-moz-placeholder          {color:#e6af2e !important; text-shadow: none;}/* Firefox 19+ */
+:-moz-placeholder           {color:#e6af2e !important; text-shadow: none;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#e6af2e !important; text-shadow: none;}

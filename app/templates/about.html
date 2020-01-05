@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block navlinks %}
+  <a class="nav-link" href="/">Home</a>
+  <a class="nav-link active" href="/about">About</a>
+  <a class="nav-link" href="/top">Top</a>
+{% endblock %}
+
+{% block content %}
+  <div class="vertical-center">
+    <div class="container">
+      <div class="row mx-auto text-center mb-5 pb-5">
+        <div class="col-12">
+          <h1 class="urobilin main-label">Seductor</h1>
+          <h3 class="urobilin">
+            open source URL-shortener
+          </h3>
+        </div>
+        <div class="col-6 mx-auto text-center">
+          <p class="urobilin">
+            URL shortening is a technique on the World Wide Web in which a Uniform Resource Locator (URL) may be made substantially shorter and still direct to the required page.
+          </p>
+        </div>
+        <div class="col-12 mx-auto text-center">
+          <a href="https://github.com/TitaniumHocker/Seductor" class="urobilin magic-link">
+            Project on GitHub
+          </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

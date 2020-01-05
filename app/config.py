@@ -14,5 +14,5 @@ API_KEY = environ.get('API_KEY')
 
 # Devepopment config
 SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
-DOMAINS = ['localhost']
-
+DOMAINS = ['localhost:5000']
+SCHEME = 'http'

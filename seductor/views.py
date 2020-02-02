@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import request, render_template, redirect, abort
+from flask import request, render_template, redirect, abort, url_for
 from .app import app
 from .extensions import db
 from .models import Links
@@ -27,14 +27,12 @@ def index_page():
     short_url = f'{BASE_URL}/{base62.encode(link.id)}'
     return render_template('magic.html', short_url=short_url), 201
 
-
 @app.route('/<magical_url>')
 def magical_page(magical_url):
     link = Links.query.filter_by(id=base62.decode(magical_url)).first_or_404()
     link.visits += 1
     db.session.commit()
     return redirect(link.original_url)
-
 
 @app.route('/about', methods=['GET', 'POST'])
 def about_page():
@@ -44,7 +42,6 @@ def about_page():
 @app.route('/top', methods=['GET', 'POST'])
 def top_page():
     return render_template('top.html')
-
 
 @app.errorhandler(404)
 def not_found_page(e):

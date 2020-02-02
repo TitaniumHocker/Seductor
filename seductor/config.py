@@ -6,6 +6,8 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SECRET_KEY = environ.get('SECRET_KEY')
 API_KEY = environ.get('API_KEY')
 
+API_ID_SIZE=16
+
 # Domains
 # DOMAINS = ['sdct.ru']
 

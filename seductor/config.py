@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os import environ
+from os import environ, path
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -15,6 +15,6 @@ API_ID_SIZE=16
 # SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://seductor_user:pass@localhost/seductor_db'
 
 # Devepopment config
-SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
+SQLALCHEMY_DATABASE_URI = f'sqlite:///{path.join(path.dirname(__file__), path.pardir, "db.sqlite")}'
 DOMAINS = ['localhost:5000']
 SCHEME = 'http'

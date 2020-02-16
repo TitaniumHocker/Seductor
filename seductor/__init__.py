@@ -1,6 +1,6 @@
 # -*- cofing: utf-8 -*-
 from .app import app as application
-from .extensions import db
+from .database import db
 from .models import Links
 from . import views
 

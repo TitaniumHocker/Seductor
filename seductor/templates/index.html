@@ -1,26 +1,19 @@
 {% extends 'base.html' %}
 
-{% block navlinks %}
-  <a class="nav-link active" href="/">Home</a>
-  <a class="nav-link" href="/about">About</a>
-  <a class="nav-link" href="/top">Top</a>
-{% endblock %}
-
 {% block content %}
-  <div class="vertical-center">
-    <div class="container">
-      <div class="row mx-auto text-center mb-5 pb-5">
-        <div class="col-12">
-          <h1 class="urobilin main-label">Seductor</h1>
-        </div>
-        <div class="col-12 mx-auto text-center">
-          <form class="form-inline" method="POST">
-            <div class="input-group col-6 mx-auto">
-              <input type="url" class="form-control form-control-lg bg-smooth-white urobilin cornered only-bottom-border" placeholder="Type your URL here" name="url" required>
-              <button class="btn bg-urobilin pure-white cornered px-3" type="submit" style="font-size:18px;">Magic</button>
+  <div class="jumbotron bg-smooth-white mt-4 jumbotron-fluid">
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-md-8 col-12 mx-auto">
+          <h1 class="maroon main-label text-center mb-4">Seductor</h1>
+          <form class="form-row mx-auto" method="GET">
+            <div class="col-lg-10">
+              <input type="url" class="form-control form-control-lg bg-smooth-white maroon cornered only-bottom-border" placeholder="Type your URL here" name="url" required>
+            </div>
+            <div class="col-lg-2">
+              <button class="btn btn-block bg-maroon pure-white cornered" type="submit" style="font-size:18px;">Magic</button>
             </div>
           </form>
-
         </div>
       </div>
     </div>

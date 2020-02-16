@@ -1,31 +1,42 @@
 {% extends 'base.html' %}
 
-{% block navlinks %}
-  <a class="nav-link" href="/">Home</a>
-  <a class="nav-link active" href="/about">About</a>
-  <a class="nav-link" href="/top">Top</a>
-{% endblock %}
-
 {% block content %}
-  <div class="vertical-center">
-    <div class="container">
-      <div class="row mx-auto text-center mb-5 pb-5">
-        <div class="col-12">
-          <h1 class="urobilin main-label">Seductor</h1>
-          <h3 class="urobilin">
-            open source URL-shortener
-          </h3>
-        </div>
-        <div class="col-6 mx-auto text-center">
-          <p class="urobilin">
-            URL shortening is a technique on the World Wide Web in which a Uniform Resource Locator (URL) may be made substantially shorter and still direct to the required page.
-          </p>
-        </div>
-        <div class="col-12 mx-auto text-center">
-          <a href="https://github.com/TitaniumHocker/Seductor" class="urobilin magic-link">
-            Project on GitHub
-          </a>
-      </div>
+  <div class="jumbotron bg-smooth-white">
+    <div class="container col-md-8">
+      <h2 class="text-center main-label maroon mb-4">About project</h2>
+      <dl class="row">
+        <dt class="col-sm-3 maroon">Seductor</dt>
+        <dd class="col-sm-9">
+        Seductor is open-source url-shortener web-application written on Python3 using 
+        <a class="magic-link" href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>
+        framework and some Flask-extensions. 
+        </dd>
+        <dt class="col-sm-3 maroon">URL-shortening</dt>
+        <dd class="col-sm-9">
+            URL shortening is a technique on the World Wide Web in which a Uniform Resource Locator
+            (URL) may be made substantially shorter and still direct to the required page.
+            This is achieved by using a redirect which links to the web page that has a long URL.
+            ref: <a href="https://en.wikipedia.org/wiki/URL_shortening" class="magic-link">wikipedia.org</a>
+        </dd>
+        <dt class="col-sm-3 maroon">Usage</dt>
+        <dd class="col-sm-9">
+          You can create short url and QR code on main page(index page) of this site.
+        </dd>
+        <dt class="col-sm-3 maroon">Limitations</dt>
+        <dd class="col-sm-9">
+          On this site for unregistered users limit on generating short urls is 5 per day. Also there are some limits on creating chort links to short links. Some domains are also can not be used in long url.
+        </dd>
+        <dt class="col-sm-3 maroon">Selfhosted</dt>
+        <dd class="col-sm-9">
+        Service can be used on this site or deployed using your own server and domain. More information can be found in 
+        <a class="magic-link" href="http://docs.sdct.ru/">documentation</a>.
+        </dd>
+        <dt class="col-sm-3 maroon">Sources</dt>
+        <dd class="col-sm-9">
+          You can find repository of this project on 
+          <a class="magic-link" href="https://github.com/TitaniumHocker/Seductor">GitHub</a>.
+        </dd>
+      </dl>
     </div>
   </div>
 {% endblock %}

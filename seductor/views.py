@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, abort, url_for
 from .app import app
-from .extensions import db
+from .database import db
 from .models import Links
 import base62
 
@@ -34,14 +34,14 @@ def magical_page(magical_url):
     db.session.commit()
     return redirect(link.original_url)
 
-@app.route('/about', methods=['GET', 'POST'])
+@app.route('/about', methods=['GET'])
 def about_page():
     return render_template('about.html')
 
 
-@app.route('/top', methods=['GET', 'POST'])
+@app.route('/stats', methods=['GET'])
 def top_page():
-    return render_template('top.html')
+    return render_template('stats.html')
 
 @app.errorhandler(404)
 def not_found_page(e):

@@ -28,6 +28,9 @@ flask-security = "*"
 flask-praetorian = "*"
 flask-migrate = "*"
 flask-limiter = "*"
+bcrypt = "*"
+qrcode = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

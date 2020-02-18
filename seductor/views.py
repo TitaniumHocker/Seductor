@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, abort, url_for
-from .app import app
+from .models import Link, Visit, User, Role
+from . import controller as ctl
 from .database import db
-from .models import Links
-import base62
+from .app import app
+import base62 as b62
 
 # Redirection filter regex sample
 # ^http(s)?:\/\/(www\.)?(sdct\.ru|seductor\.ru)(\/.+|\/)?$
@@ -13,35 +14,31 @@ BASE_URL = f'{app.config["SCHEME"]}://{app.config["DOMAINS"][-1]}'
 def index_page():
     if request.method == 'GET':
         return render_template('index.html')
-
     url = request.form.get('url')
-    query = Links.query.filter_by(original_url=url).first()
-    if query:
-        short_url = f'{BASE_URL}/{base62.encode(query.id)}'
-        return render_template('magic.html', short_url=short_url)
-
-    link = Links(original_url=url)
-    db.session.add(link)
-    db.session.commit()
-    db.session.refresh(link)
-    short_url = f'{BASE_URL}/{base62.encode(link.id)}'
-    return render_template('magic.html', short_url=short_url), 201
-
-@app.route('/<magical_url>')
-def magical_page(magical_url):
-    link = Links.query.filter_by(id=base62.decode(magical_url)).first_or_404()
-    link.visits += 1
-    db.session.commit()
-    return redirect(link.original_url)
+    link = ctl.link.get_by_url(url)
+    if link:
+        short_url = f'{BASE_URL}/{b62.encode(link.id)}'
+        return render_template('magic.html',
+                short_url=short_url, qrname=b62.encode(link.id))
+    link = ctl.link.create(url)
+    short_url = f'{BASE_URL}/{b62.encode(link.id)}'
+    return render_template('magic.html',
+            short_url=short_url, qrname=b62.encode(link.id)), 201
 
 @app.route('/about', methods=['GET'])
 def about_page():
     return render_template('about.html')
 
-
 @app.route('/stats', methods=['GET'])
 def top_page():
-    return render_template('stats.html')
+    top = ctl.link.get_top()
+    return render_template('stats.html', top=top)
+
+@app.route('/<link_id>')
+def redirect_link(link_id):
+    link = ctl.link.get_by_id(b62.decode(link_id))
+    ctl.link.register_visit(link, request.remote_addr)
+    return redirect(link.original_url)
 
 @app.errorhandler(404)
 def not_found_page(e):

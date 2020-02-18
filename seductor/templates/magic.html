@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="vertical-center">
-    <div class="container">
-      <div class="row mx-auto text-center mb-5 pb-5">
-        <div class="col-12">
-          <h1 class="urobilin main-label">Magic URL:</h1>
-        </div>
-        <div class="col-12 mx-auto text-center">
-          <a href="{{ short_url }}" class="magic-link">
-            <h2 class="urobilin">{{ short_url }}</h2>
+  <div class="jumbotron bg-smooth-white mt-4">
+    <div class="container my-4">
+      <div class="row">
+        <div class="col-md-8 col-12 mx-auto">
+          <a href="{{ short_url }}" class="magic-link text-center">
+            <h2 class="maroon">{{ short_url }}</h2>
           </a>
+          <div class="text-center">
+            <img src="{{ url_for('static', filename='img/{}.png'.format(qrname)) }}">
+          </div>
         </div>
       </div>
     </div>

@@ -34,10 +34,13 @@ def register_visit(link, remote_host):
     return True
 
 def get_top():
-    top = Link.query.order_by(Link.visits).all()
+    raw_top = Link.query.\
+            outerjoin(Link.visits).\
+            group_by(Link.id).\
+            order_by(db.func.count(Visit.id).desc()).\
+            limit(100).all()
     logger.debug(f'controller.link.get_top')
-    print(top)
-    return top
+    return [{'id': link.id, 'url': link.original_url, 'visits': link.visits.count()} for link in raw_top]
 
 def _generate_qr_code(link):
     link_url = f'{BASE_URL}/{b62.encode(link.id)}'

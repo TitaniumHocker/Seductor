@@ -9,12 +9,12 @@ BASE_URL = f'{app.config["SCHEME"]}://{app.config["DOMAINS"][-1]}'
 
 def get_by_id(link_id):
     link = Link.query.filter_by(id=link_id).first_or_404()
-    logger.debug(f'controller.link.get_by_id {link_id} => {link}')
+    logger.debug(f'{__name__}.get_by_id {link_id} => {link}')
     return link
 
 def get_by_url(url):
     link = Link.query.filter_by(original_url=url).first()
-    logger.debug(f'controller.link.get_by_url {url} => {link}')
+    logger.debug(f'{__name__}.get_by_url {url} => {link}')
     return link
 
 def create(url):
@@ -22,7 +22,7 @@ def create(url):
     db.session.add(link)
     db.session.commit()
     db.session.refresh(link)
-    logger.debug(f'controller.link.create {url} => {link}')
+    logger.debug(f'{__name__}.create {url} => {link}')
     _generate_qr_code(link)
     return link
 
@@ -30,8 +30,8 @@ def register_visit(link, remote_host):
     visit = Visit(host=remote_host)
     link.visits.append(visit)
     db.session.commit()
-    logger.debug(f'controller.link.register_visit to {link} from {remote_host}')
-    return True
+    logger.debug(f'{__name__}.register_visit to {link} from {remote_host}')
+    return
 
 def get_top():
     raw_top = Link.query.\
@@ -39,8 +39,11 @@ def get_top():
             group_by(Link.id).\
             order_by(db.func.count(Visit.id).desc()).\
             limit(100).all()
-    logger.debug(f'controller.link.get_top')
-    return [{'id': link.id, 'url': link.original_url, 'visits': link.visits.count()} for link in raw_top]
+    logger.debug(f'{__name__}.get_top: len(raw_top) => {len(raw_top)}')
+    return [{
+        'id': link.id,
+        'original_url': link.original_url,
+        'visits_count': link.visits.count()} for link in raw_top]
 
 def _generate_qr_code(link):
     link_url = f'{BASE_URL}/{b62.encode(link.id)}'
@@ -57,4 +60,5 @@ def _generate_qr_code(link):
             back_color='#e6e6e6'
             )
     img.save(f'seductor/static/img/{b62.encode(link.id)}.png')
-    logger.debug(f'controller.link._generate_qr_code {link}')
+    logger.debug(f'{__name__}._generate_qr_code for {link}')
+    return

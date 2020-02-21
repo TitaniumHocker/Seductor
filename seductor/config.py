@@ -22,7 +22,7 @@ API_ID_SIZE=16
 SQLALCHEMY_DATABASE_URI = f'sqlite:///{path.join(path.dirname(__file__), path.pardir, "db.sqlite3")}'
 DOMAINS = ['localhost:5000']
 SCHEME = 'http'
-
+BASE_URL = f'{SCHEME}://{DOMAINS[-1]}'
 
 # logging configuration
 LOGGING_LEVEL = 'DEBUG' # DEBUG for developers, ERROR on production

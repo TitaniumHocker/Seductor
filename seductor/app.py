@@ -8,7 +8,7 @@ from flask_security import (
         )
 from .database import db
 from .models import User, Role
-
+from .blueprints import api
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -24,3 +24,5 @@ migrate = Migrate(app, db)
 # setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
+
+app.register_blueprint(api, url_prefix='/api')

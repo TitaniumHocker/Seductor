@@ -1,2 +1,3 @@
 #! -*- coding: utf-8 -*-
-from .main import api
+from .api import api
+

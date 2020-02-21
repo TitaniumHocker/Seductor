@@ -1,23 +1,24 @@
 #! -*- coding: utf-8 -*-
 from ..models import Link, Visit
 from ..app import app, db, logger
+from typing import List
 import base62 as b62
 import qrcode
 
 
 BASE_URL = f'{app.config["SCHEME"]}://{app.config["DOMAINS"][-1]}'
 
-def get_by_id(link_id):
+def get_by_id(link_id: int) -> object:
     link = Link.query.filter_by(id=link_id).first_or_404()
     logger.debug(f'{__name__}.get_by_id {link_id} => {link}')
     return link
 
-def get_by_url(url):
+def get_by_url(url: str) -> object:
     link = Link.query.filter_by(original_url=url).first()
     logger.debug(f'{__name__}.get_by_url {url} => {link}')
     return link
 
-def create(url):
+def create(url: str) -> object:
     link = Link(original_url=url)
     db.session.add(link)
     db.session.commit()
@@ -26,26 +27,26 @@ def create(url):
     _generate_qr_code(link)
     return link
 
-def register_visit(link, remote_host):
+def register_visit(link: object, remote_host: str) -> None:
     visit = Visit(host=remote_host)
     link.visits.append(visit)
     db.session.commit()
     logger.debug(f'{__name__}.register_visit to {link} from {remote_host}')
     return
 
-def get_top():
+def get_top() -> List[dict]:
     raw_top = Link.query.\
             outerjoin(Link.visits).\
             group_by(Link.id).\
             order_by(db.func.count(Visit.id).desc()).\
             limit(100).all()
-    logger.debug(f'{__name__}.get_top: len(raw_top) => {len(raw_top)}')
+    logger.debug(f'{__name__}.get_top: len => {len(raw_top)}')
     return [{
         'id': link.id,
         'original_url': link.original_url,
         'visits_count': link.visits.count()} for link in raw_top]
 
-def _generate_qr_code(link):
+def _generate_qr_code(link: object) -> None:
     link_url = f'{BASE_URL}/{b62.encode(link.id)}'
     qr = qrcode.QRCode(
             version=None,

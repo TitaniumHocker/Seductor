@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
-from seductor import get_app
+from seductor import app
 
-application = get_app()
+if __name__ == '__main__':
+    app.run()
+

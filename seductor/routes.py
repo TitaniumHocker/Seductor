@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import request, render_template, redirect, abort, url_for
-from .models import Link, Visit, User, Role
-from . import controller as ctl
-from .database import db
-from .app import app
+from flask import request, render_template, redirect, abort
+import seductor.controller as ctl
+from seductor.config import BASE_URL
+from seductor import app
 import base62 as b62
 
-# Redirection filter regex sample
-# ^http(s)?:\/\/(www\.)?(sdct\.ru|seductor\.ru)(\/.+|\/)?$
-BASE_URL = f'{app.config["SCHEME"]}://{app.config["DOMAINS"][-1]}'
 
 @app.route('/', methods=['GET', 'POST'])
 def index_page():
@@ -19,26 +15,34 @@ def index_page():
     if link:
         short_url = f'{BASE_URL}/{b62.encode(link.id)}'
         return render_template('magic.html',
-                short_url=short_url, qrname=b62.encode(link.id))
+                               short_url=short_url,
+                               qrname=b62.encode(link.id))
     link = ctl.link.create(url)
     short_url = f'{BASE_URL}/{b62.encode(link.id)}'
     return render_template('magic.html',
-            short_url=short_url, qrname=b62.encode(link.id)), 201
+                           short_url=short_url,
+                           qrname=b62.encode(link.id)), 201
+
 
 @app.route('/about', methods=['GET'])
 def about_page():
     return render_template('about.html')
+
 
 @app.route('/stats', methods=['GET'])
 def top_page():
     top = ctl.link.get_top()
     return render_template('stats.html', top=top)
 
+
 @app.route('/<link_id>')
 def redirect_link(link_id):
     link = ctl.link.get_by_id(b62.decode(link_id))
+    if not link:
+        abort(404)
     ctl.link.register_visit(link, request.remote_addr)
     return redirect(link.original_url)
+
 
 @app.errorhandler(404)
 def not_found_page(e):

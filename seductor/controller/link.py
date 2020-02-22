@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
-from ..models import Link, Visit
-from ..app import app, db, logger
+from seductor.models import Link, Visit
+from seductor import app, db, logger
 from typing import List
 import base62 as b62
 import qrcode
@@ -9,7 +9,7 @@ import qrcode
 BASE_URL = f'{app.config["SCHEME"]}://{app.config["DOMAINS"][-1]}'
 
 def get_by_id(link_id: int) -> object:
-    link = Link.query.filter_by(id=link_id).first_or_404()
+    link = Link.query.filter_by(id=link_id).first()
     logger.debug(f'{__name__}.get_by_id {link_id} => {link}')
     return link
 

@@ -1,6 +1,5 @@
 #! -*- coding: utf-8 -*-
 from datetime import datetime
-# from json import dumps as jsonify
 from string import ascii_letters, digits
 from random import choice
 from seductor.config import API_ID_SIZE

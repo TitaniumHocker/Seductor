@@ -14,7 +14,7 @@ app.config.from_pyfile('config.py')
 # Init extensions
 ###
 db.init_app(app)  # SQLAlchemy database
-migrate.init_app(app)  # Migrations
+migrate.init_app(app, db)  # Migrations
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security.init_app(app, user_datastore)  # Security
 

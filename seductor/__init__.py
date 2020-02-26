@@ -25,4 +25,4 @@ logger = logging.getLogger('seductor_logger')
 from seductor.api import api_bp
 app.register_blueprint(api_bp, url_prefix='/api')
 
-from seductor import routes
+from seductor import routes, errorhandlers

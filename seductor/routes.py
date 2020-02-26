@@ -42,8 +42,3 @@ def redirect_link(link_id):
         abort(404)
     ctl.link.register_visit(link, request.remote_addr)
     return redirect(link.original_url)
-
-
-@app.errorhandler(404)
-def not_found_page(e):
-    return render_template('404.html'), 404

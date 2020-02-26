@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
 from seductor.logger_conf import configuration as log_conf
-import logging.config
-from flask_security import SQLAlchemyUserDatastore
 from seductor.extensions import db, migrate, security
+from flask_security import SQLAlchemyUserDatastore
 from seductor.models import User, Role
+from flask import Flask
+import logging.config
 
 # Init Flask application
 app = Flask(__name__)

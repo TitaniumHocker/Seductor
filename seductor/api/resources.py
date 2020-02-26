@@ -1,9 +1,9 @@
 #! -*- coding: utf-8 -*-
-from flask import request
+from seductor.api.tools import generate_api_response as apires
 from flask_restful import Resource, reqparse
 from seductor import controller as ctl
 from seductor.config import BASE_URL
-from seductor.api.tools import generate_api_response as apires
+from flask import request
 import base62 as b62
 
 

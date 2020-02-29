@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 flask2postman = "*"
+pytest-flask = "*"
 
 [packages]
 certifi = "==2019.11.28"

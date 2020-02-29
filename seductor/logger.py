@@ -1,5 +1,7 @@
 #! -*- coding: utf-8 -*-
 from .config import LOGGING_LEVEL
+import logging.config
+
 
 configuration = {
         'version': 1,
@@ -24,3 +26,6 @@ configuration = {
                 }
             }
         }
+
+logging.config.dictConfig(configuration)
+logger = logging.getLogger('seductor_logger')

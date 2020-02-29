@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask_security import UserMixin, RoleMixin
 from datetime import datetime
-from seductor.extensions import db
+from flask_sqlalchemy import SQLAlchemy
 
+
+db = SQLAlchemy()
 
 roles_users = db.Table('roles_users',
                        db.Column('user_id',

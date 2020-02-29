@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, abort
 import seductor.controller as ctl
-from seductor.config import BASE_URL
 from seductor import app
+from seductor.config import BASE_URL
 import base62 as b62
 
 

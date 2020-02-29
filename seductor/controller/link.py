@@ -1,7 +1,8 @@
 #! -*- coding: utf-8 -*-
 from seductor.models import Link, Visit
 from seductor.config import BASE_URL
-from seductor import db, logger
+from seductor.logger import logger
+from seductor import db
 from typing import List
 import base62 as b62
 import qrcode

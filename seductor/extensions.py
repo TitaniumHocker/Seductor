@@ -1,13 +1,9 @@
 #! -*- coding: utf-8 -*-
-
-# SQL Alchemy | Flask-SQLAlchemy
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
-
-# Migrations | Flask-Migrate
 from flask_migrate import Migrate
-migrate = Migrate()
+from flask_security import Security, SQLAlchemyUserDatastore
+from seductor.models import db, User, Role
 
-# security | Flask-Security
-from flask_security import Security
+
+migrate = Migrate()
 security = Security()
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)

@@ -20,13 +20,14 @@ def get_by_url(url: str) -> object:
     return link
 
 
-def create(url: str) -> object:
+def create(url: str, create_qr: bool = True) -> object:
     link = Link(original_url=url)
     db.session.add(link)
     db.session.commit()
     db.session.refresh(link)
     logger.info(f'{__name__}.create {url} => {link}')
-    _generate_qr_code(link)
+    if create_qr:
+        _generate_qr_code(link)
     return link
 
 

@@ -1,6 +1,7 @@
 #! -*- coding:utf-8 -*-
 from seductor import controller as ctl
 from tests.conftest import client as c
+from flask import current_app as app
 import base62 as b62
 
 
@@ -23,7 +24,8 @@ def test_create(c):
 def test_register_visit(c):
     url = 'https://cocainum.ru'
     link = ctl.link.create(url)
-    assert c.get(f'{b62.encode(link.id)}').status_code == 302
+    assert c.get(f'{app.config["LINK_PREFIX"]}{b62.encode(link.id)}')\
+        .status_code == 302
     assert link.visits.count() == 1
 
 

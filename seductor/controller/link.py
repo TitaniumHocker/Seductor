@@ -1,6 +1,6 @@
 #! -*- coding: utf-8 -*-
+from flask import current_app as app
 from seductor.models import Link, Visit
-from seductor.config import BASE_URL
 from seductor.logger import logger
 from seductor import db
 from typing import List
@@ -55,7 +55,9 @@ def get_top() -> List[dict]:
 
 
 def _generate_qr_code(link: object) -> None:
-    link_url = f'{BASE_URL}/{b62.encode(link.id)}'
+    link_url = (f'{app.config["BASE_URL"]}/'
+                f'{app.config["LINK_PREFIX"]}'
+                f'{b62.encode(link.id)}')
     qr = qrcode.QRCode(
             version=None,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -68,6 +70,7 @@ def _generate_qr_code(link: object) -> None:
             fill_color='#800000',
             back_color='#e6e6e6'
             )
-    img.save(f'seductor/static/img/{b62.encode(link.id)}.png')
+    img.save(f'seductor/static/img/{app.config["QR_CODE_PREFIX"]}'
+             f'{b62.encode(link.id)}.png')
     logger.info(f'{__name__}._generate_qr_code for {link}')
     return

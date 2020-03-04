@@ -1,31 +1,34 @@
 #! -*- coding: utf-8 -*-
-from .config import LOGGING_LEVEL
 import logging.config
 
 
-configuration = {
+def set_logger_config(level='DEBUG'):
+    configuration = {
         'version': 1,
         'disable_existing_loggers': False,
         'formatters': {
             'stream_format': {
                 'format': '{asctime}:{levelname}:{name}:{message}',
                 'style': '{'
-                }
-            },
+            }
+        },
         'handlers': {
             'stream_handler': {
                 'class': 'logging.StreamHandler',
-                'level': LOGGING_LEVEL,
+                'level': level,
                 'formatter': 'stream_format'
-                }
-            },
+            }
+        },
         'loggers': {
             'seductor_logger': {
-                'level': LOGGING_LEVEL,
+                'level': level,
                 'handlers': ['stream_handler']
-                }
             }
         }
+    }
 
-logging.config.dictConfig(configuration)
+    logging.config.dictConfig(configuration)
+    return
+
+
 logger = logging.getLogger('seductor_logger')

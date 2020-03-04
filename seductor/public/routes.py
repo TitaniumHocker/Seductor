@@ -1,41 +1,47 @@
 # -*- coding: utf-8 -*-
 from flask import request, render_template, redirect, abort
 import seductor.controller as ctl
-from seductor import app
-from seductor.config import BASE_URL
+from flask import current_app as app
+from seductor.public import public_bp as bp
 import base62 as b62
 
 
-@app.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def index_page():
     if request.method == 'GET':
         return render_template('index.html')
     url = request.form.get('url')
     link = ctl.link.get_by_url(url)
     if link:
-        short_url = f'{BASE_URL}/l{b62.encode(link.id)}'
+        short_url = (f'{app.config.get("BASE_URL")}/'
+                     f'{app.config.get("LINK_PREFIX")}'
+                     f'{b62.encode(link.id)}')
+        qr_name = f'{app.config.get("QR_CODE_PREFIX")}{b62.encode(link.id)}'
         return render_template('magic.html',
                                short_url=short_url,
-                               qrname=b62.encode(link.id))
+                               qr_name=qr_name)
     link = ctl.link.create(url)
-    short_url = f'{BASE_URL}/l{b62.encode(link.id)}'
+    short_url = (f'{app.config.get("BASE_URL")}/'
+                 f'{app.config.get("LINK_PREFIX")}'
+                 f'{b62.encode(link.id)}')
+    qr_name = f'{app.config.get("QR_CODE_PREFIX")}{b62.encode(link.id)}'
     return render_template('magic.html',
                            short_url=short_url,
-                           qrname=b62.encode(link.id)), 201
+                           qr_name=qr_name), 201
 
 
-@app.route('/about', methods=['GET'])
+@bp.route('/about', methods=['GET'])
 def about_page():
     return render_template('about.html')
 
 
-@app.route('/stats', methods=['GET'])
+@bp.route('/stats', methods=['GET'])
 def top_page():
     top = ctl.link.get_top()
     return render_template('stats.html', top=top)
 
 
-@app.route('/l<link_id>')
+@bp.route('/l<link_id>')
 def redirect_link(link_id):
     link = ctl.link.get_by_id(b62.decode(link_id))
     if not link:

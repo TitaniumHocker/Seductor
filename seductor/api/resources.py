@@ -2,7 +2,7 @@
 from seductor.api.tools import generate_api_response as apires
 from flask_restful import Resource, reqparse
 from seductor import controller as ctl
-from seductor.config import BASE_URL
+from flask import current_app as app
 from flask import request
 import base62 as b62
 
@@ -27,7 +27,8 @@ class Links(Resource):
         if link:
             return apires(
                     data={
-                        'link': f'{BASE_URL}/{b62.encode(link.id)}'
+                        'link': (f'{app.config["BASE_URL"]}/'
+                                 f'{b62.encode(link.id)}')
                         },
                     method=request.method,
                     uri=request.path
@@ -35,7 +36,7 @@ class Links(Resource):
         link = ctl.link.create(url)
         return apires(
                 data={
-                    'link': f'{BASE_URL}/{b62.encode(link.id)}'
+                    'link': f'{app.config["BASE_URL"]}/{b62.encode(link.id)}'
                     },
                 method=request.method,
                 uri=request.path
@@ -48,7 +49,7 @@ class Link(Resource):
         if link:
             return apires(data={
                 'id': f'{link.id}',
-                'link': f'{BASE_URL}/{b62.encode(link.id)}',
+                'link': f'{app.config["BASE_URL"]}/{b62.encode(link.id)}',
                 'original_url': link.original_url
             },
                 method=request.method,

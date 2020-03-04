@@ -8,12 +8,9 @@ import os
 
 @pytest.fixture
 def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    tmp_db = tempfile.mkstemp()
-    print(tmp_db)
-    db_fd = tmp_db
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{tmp_db[1]}'
+    app = create_app(mode='testing')
+    temp_file = tempfile.mkstemp()
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{temp_file[1]}'
 
     with app.test_client() as client:
         with app.app_context():
@@ -22,5 +19,5 @@ def client():
             db.session.remove()
             db.drop_all()
 
-    os.close(db_fd[0])
-    os.unlink(tmp_db[1])
+    os.close(temp_file[0])
+    os.unlink(temp_file[1])

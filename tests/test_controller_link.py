@@ -2,7 +2,13 @@
 from seductor import controller as ctl
 from tests.conftest import client as c
 from flask import current_app as app
+from string import digits
+from random import choice
+import tests.conftest
 import base62 as b62
+
+
+c = tests.conftest.client
 
 
 def test_get_link_by_id(c):
@@ -36,6 +42,17 @@ def test_get_top_simple(c):
         'https://heroin.ru'
     ]
     for url in urls:
-        ctl.link.create(url)
+        ctl.link.create(url, create_qr=False)
 
     assert len(ctl.link.get_top()) == 3
+
+
+def test_get_top_advanced(c):
+    urls = [
+        f'https://{"".join(choice(digits) for _ in range(256))}.ru'
+        for _ in range(150)
+    ]
+    for url in urls:
+        ctl.link.create(url, create_qr=False)
+
+    assert len(ctl.link.get_top()) == 100

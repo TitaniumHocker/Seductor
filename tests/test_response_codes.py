@@ -22,5 +22,5 @@ def test_stats(client):
 def test_not_found(client):
     assert client.get('/where').status_code == 404
     assert client.get('/is').status_code == 404
-    assert client.get('my').status_code == 404
+    assert client.get('/my').status_code == 404
     assert client.get('/money').status_code == 404

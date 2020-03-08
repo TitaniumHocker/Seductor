@@ -7,6 +7,7 @@ verify_ssl = true
 pytest = "*"
 flask2postman = "*"
 pytest-flask = "*"
+pytest-cov = "*"
 
 [packages]
 certifi = "==2019.11.28"
@@ -32,6 +33,7 @@ flask-limiter = "*"
 bcrypt = "*"
 qrcode = "*"
 pillow = "*"
+pipfile = "*"
 
 [requires]
 python_version = "3.8"
